@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getStopsForRoute, routes, stops } from "@/src/data/hubina";
 
 const stats = [
-  { value: "3", label: "testové zastavenia" },
+  { value: "9", label: "testových zastavení" },
   { value: "3", label: "navrhnuté okruhy" },
   { value: "17 km", label: "veľký okruh z podkladu" },
   { value: "QR", label: "priame stránky bodov" },
@@ -18,8 +18,8 @@ const typeLabel = {
 };
 
 export default function Home() {
-  const firstRoute = routes[0];
-  const firstRouteStops = getStopsForRoute(firstRoute);
+  const featuredRoute = routes[1];
+  const featuredStops = getStopsForRoute(featuredRoute);
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#06110d] text-white">
@@ -87,7 +87,7 @@ export default function Home() {
                 <div className="absolute left-[20%] top-[18%] h-[52%] w-[58%] rotate-12 rounded-[48%] border border-cyan-200/14" />
                 <svg aria-hidden="true" className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                   <path
-                    d="M18 28 C28 18 35 20 41 32 C50 48 66 38 78 48 C91 60 80 82 62 78 C45 74 40 58 29 62 C19 66 14 47 18 28"
+                    d="M16 30 C25 22 31 22 35 30 C43 44 53 31 61 39 C70 49 87 42 82 54 C75 69 65 66 62 78 C58 92 43 74 35 69 C27 64 17 67 16 30"
                     fill="none"
                     stroke="rgba(190,242,100,0.72)"
                     strokeDasharray="2 3"
@@ -96,7 +96,7 @@ export default function Home() {
                   />
                 </svg>
 
-                {firstRouteStops.map((stop, index) => (
+                {featuredStops.map((stop) => (
                   <Link
                     key={stop.slug}
                     href={`/zastavenia/${stop.slug}`}
@@ -104,17 +104,17 @@ export default function Home() {
                     style={{ top: stop.mapPosition.top, left: stop.mapPosition.left }}
                     aria-label={stop.name}
                   >
-                    <span className="grid h-11 w-11 place-items-center rounded-full border border-lime-100/60 bg-[#13261c] text-sm font-bold text-lime-100 shadow-[0_0_32px_rgba(190,242,100,0.24)] transition group-hover:scale-105 group-hover:bg-lime-300 group-hover:text-[#07110d]">
-                      {index + 1}
+                    <span className="grid h-10 w-10 place-items-center rounded-full border border-lime-100/60 bg-[#13261c] text-sm font-bold text-lime-100 shadow-[0_0_32px_rgba(190,242,100,0.24)] transition group-hover:scale-105 group-hover:bg-lime-300 group-hover:text-[#07110d]">
+                      {stop.order}
                     </span>
                   </Link>
                 ))}
 
                 <div className="absolute bottom-4 left-4 right-4 border border-white/10 bg-black/40 p-4 backdrop-blur-md">
-                  <p className="text-sm font-medium text-lime-200">Prvý testovací okruh</p>
-                  <p className="mt-1 text-2xl font-semibold">{firstRoute.name}</p>
+                  <p className="text-sm font-medium text-lime-200">Veľký pracovný okruh</p>
+                  <p className="mt-1 text-2xl font-semibold">{featuredRoute.name}</p>
                   <p className="mt-2 text-sm leading-6 text-white/64">
-                    Orientačný náhľad podľa mapového podkladu. Presné GPS body doplníme v ďalšom kroku.
+                    Orientačný náhľad podľa mapových screenshotov. Presné GPS body doplníme postupne.
                   </p>
                 </div>
               </div>
@@ -158,14 +158,14 @@ export default function Home() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-lime-300">QR zastavenia</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Prvé testové podstránky</h2>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Pracovné podstránky bodov</h2>
             </div>
             <p className="max-w-xl text-base leading-7 text-white/62">
               Každý bod má samostatnú URL pripravenú na QR kód. Texty sú zatiaľ pracovné a budeme ich nahrádzať reálnymi podkladmi.
             </p>
           </div>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {stops.map((stop) => (
               <Link
                 key={stop.slug}
