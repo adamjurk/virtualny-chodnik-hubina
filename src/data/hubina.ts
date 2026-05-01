@@ -26,17 +26,31 @@ export type Route = {
   stopSlugs: string[];
 };
 
+const firstCircleStops = ["krizova-cesta-kaplnka", "skalka", "stary-kamenolom"];
+
+const bigCircleStops = [
+  "krizova-cesta-kaplnka",
+  "skalka",
+  "stary-kamenolom",
+  "gonove-lazy",
+  "grnica",
+  "visiace-skaly",
+  "rozhladna-marhat",
+  "pamatnik-vlada-plulika",
+  "dolnosokolske-jaskyne",
+];
+
 export const routes: Route[] = [
   {
     slug: "hubina-vyhlady",
     name: "Výhľady nad Hubinou",
-    subtitle: "Prvý pracovný okruh",
+    subtitle: "Kratší pracovný okruh",
     distance: "cca 5-7 km",
     duration: "2-3 h",
     difficulty: "stredná",
     description:
-      "Kratší okruh z obce smerom ku krížovej ceste, Skalke a starému kameňolomu. Bude slúžiť ako prvá testovacia trasa pre QR zastavenia.",
-    stopSlugs: ["krizova-cesta-kaplnka", "skalka", "stary-kamenolom"],
+      "Kratší okruh z obce smerom ku krížovej ceste, Skalke a starému kameňolomu. Slúži ako prvá testovacia trasa pre QR zastavenia.",
+    stopSlugs: firstCircleStops,
   },
   {
     slug: "velky-okruh",
@@ -46,8 +60,8 @@ export const routes: Route[] = [
     duration: "5-7 h",
     difficulty: "náročná",
     description:
-      "Dlhšia turistická verzia s prírodnými bodmi, výhľadmi, prameňmi a praktickými zastávkami po ceste. Body budeme dopĺňať postupne.",
-    stopSlugs: ["krizova-cesta-kaplnka", "skalka", "stary-kamenolom"],
+      "Dlhšia turistická verzia s výhľadmi, prírodnými bodmi, Marhátom, pamätníkom a jaskyňami. Bude vhodná pre návštevníkov, ktorí chcú prejsť celý hrebeňový okruh.",
+    stopSlugs: bigCircleStops,
   },
   {
     slug: "centrum-a-pribehy",
@@ -77,7 +91,7 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "QR kód na tomto mieste by mal návštevníka priviesť priamo sem, nie na hlavnú stránku.",
-    mapPosition: { top: "26%", left: "26%" },
+    mapPosition: { top: "30%", left: "16%" },
     order: 1,
   },
   {
@@ -94,7 +108,7 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "QR stránka môže fungovať ako malý orientačný sprievodca výhľadom.",
-    mapPosition: { top: "22%", left: "34%" },
+    mapPosition: { top: "24%", left: "30%" },
     order: 2,
   },
   {
@@ -111,8 +125,110 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "Toto zastavenie je dobrý kandidát na kombináciu textu, staršej fotografie a bezpečnostnej poznámky k pohybu v teréne.",
-    mapPosition: { top: "35%", left: "41%" },
+    mapPosition: { top: "28%", left: "34%" },
     order: 3,
+  },
+  {
+    slug: "gonove-lazy",
+    name: "Gonove lazy",
+    type: "pribeh",
+    routeSlug: "velky-okruh",
+    shortDescription:
+      "Laznícka krajina nad Hubinou, kde sa dá rozprávať o staršom osídlení, hospodárení a živote mimo centra obce.",
+    story: [
+      "Gonove lazy sú vhodné zastavenie na vysvetlenie toho, ako krajina nad Hubinou kedysi fungovala ako priestor práce, bývania a presunov.",
+      "V ďalšej fáze sem môžeme doplniť spomienky miestnych, staré názvy lúk a lazov alebo fotografie, ktoré ukážu rozdiel medzi dnešným a niekdajším využívaním krajiny.",
+      "Tento bod môže byť pokojnejším prechodom medzi obcou a výraznejšími prírodnými miestami na hrebeni.",
+    ],
+    qrNote:
+      "QR stránka môže slúžiť ako krátke vysvetlenie lazníckej krajiny a starých miestnych názvov.",
+    mapPosition: { top: "20%", left: "31%" },
+    order: 4,
+  },
+  {
+    slug: "grnica",
+    name: "Grnica",
+    type: "vyhlad",
+    routeSlug: "velky-okruh",
+    shortDescription:
+      "Výrazný bod na trase s výškou približne 522 m, vhodný na orientáciu v širšej krajine nad Hubinou.",
+    story: [
+      "Grnica je bod, ktorý na mapovom podklade prirodzene vystupuje ako orientačné miesto veľkého okruhu.",
+      "Na stránke môže byť neskôr doplnený opis výhľadov, smerov a nadväzujúcich turistických chodníkov, aby sa návštevník v teréne lepšie zorientoval.",
+      "Zastavenie môže fungovať ako krátka pauza medzi úvodnou časťou nad obcou a dlhším prechodom smerom k ďalším bodom.",
+    ],
+    qrNote:
+      "Po doplnení GPS bodu tu môže byť aj krátka orientačná mapa alebo zoznam viditeľných smerov.",
+    mapPosition: { top: "28%", left: "55%" },
+    order: 5,
+  },
+  {
+    slug: "visiace-skaly",
+    name: "Visiace skaly",
+    type: "priroda",
+    routeSlug: "velky-okruh",
+    shortDescription:
+      "Prírodný skalný bod na trase, vhodný na krátke vysvetlenie geológie a opatrného pohybu v teréne.",
+    story: [
+      "Visiace skaly môžu byť jedným z najvýraznejších prírodných zastavení veľkého okruhu.",
+      "Obsah stránky by mal neskôr vysvetliť, čím je miesto zaujímavé, ako vznikal skalný reliéf a ako sa pri takýchto miestach správať bezpečne a ohľaduplne.",
+      "Pri tomto bode sa hodí doplniť aj fotografiu priamo z terénu, pretože názov aj miesto budú pre návštevníka silno vizuálne.",
+    ],
+    qrNote:
+      "Tu sa oplatí pridať bezpečnostnú poznámku a upozorniť, že návštevník nemá schádzať mimo chodníka.",
+    mapPosition: { top: "38%", left: "74%" },
+    order: 6,
+  },
+  {
+    slug: "rozhladna-marhat",
+    name: "Rozhľadňa Marhát",
+    type: "vyhlad",
+    routeSlug: "velky-okruh",
+    shortDescription:
+      "Dominantný výhľadový cieľ veľkého okruhu, jeden z najsilnejších bodov celej trasy.",
+    story: [
+      "Rozhľadňa Marhát je prirodzený vrcholový cieľ, ktorý dáva veľkému okruhu jasný zmysel a odmenu po výstupe.",
+      "Na detailnej stránke môže byť neskôr panoramatický opis výhľadov, odporúčanie na zastavenie a praktická informácia o náročnosti prístupu.",
+      "Toto zastavenie by malo byť medzi hlavnými QR bodmi, pretože návštevník tu pravdepodobne strávi viac času a bude hľadať kontext k okolitej krajine.",
+    ],
+    qrNote:
+      "QR obsah môže obsahovať orientačný opis panorámy a odkazy na ďalšie body v okolí.",
+    mapPosition: { top: "64%", left: "78%" },
+    order: 7,
+  },
+  {
+    slug: "pamatnik-vlada-plulika",
+    name: "Pamätník Vlada Plulíka",
+    type: "pribeh",
+    routeSlug: "velky-okruh",
+    shortDescription:
+      "Pamätné miesto na trase, vhodné na citlivé spracovanie osobného príbehu a lokálnej pamäti.",
+    story: [
+      "Pamätník Vlada Plulíka by mal byť spracovaný citlivo, vecne a s rešpektom k človeku aj miestu.",
+      "V pracovnej verzii nechávame text otvorený, kým doplníme presné informácie, rok, súvislosti a prípadne zdroj overených údajov.",
+      "Takéto zastavenie môže návštevníkovi pripomenúť, že turistická trasa nie je len príroda, ale aj pamäť ľudí, udalostí a vzťahov ku krajine.",
+    ],
+    qrNote:
+      "Pred finálnym publikovaním tu bude dobré overiť text s dôveryhodným zdrojom alebo rodinou/obcou.",
+    mapPosition: { top: "72%", left: "54%" },
+    order: 8,
+  },
+  {
+    slug: "dolnosokolske-jaskyne",
+    name: "Veľká a Malá Dolnosokolská jaskyňa",
+    type: "priroda",
+    routeSlug: "velky-okruh",
+    shortDescription:
+      "Dvojica prírodných bodov pri trase, vhodná na vysvetlenie krasových javov a opatrného pohybu v okolí jaskýň.",
+    story: [
+      "Veľká a Malá Dolnosokolská jaskyňa môžu tvoriť spoločné prírodné zastavenie veľkého okruhu.",
+      "Obsah by mal návštevníka upozorniť na hodnotu miesta, potrebu rešpektovať prírodu a nevstupovať tam, kde to nie je bezpečné alebo povolené.",
+      "Po doplnení presných podkladov môžeme rozlíšiť obe jaskyne, pridať fotografie a krátke vysvetlenie ich geologického významu.",
+    ],
+    qrNote:
+      "Pri jaskyniach je dôležité doplniť praktickú bezpečnostnú poznámku a jasné pravidlá správania.",
+    mapPosition: { top: "74%", left: "55%" },
+    order: 9,
   },
 ];
 
