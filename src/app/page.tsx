@@ -36,12 +36,18 @@ const routePoints = [
   { top: "78%", left: "76%" },
 ];
 
+const heroImage = "/hubina-panorama.jpg";
+
 export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#06110d] text-white">
       <section className="relative isolate">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(132,204,22,0.18),transparent_32%),radial-gradient(circle_at_80%_15%,rgba(20,184,166,0.12),transparent_28%),linear-gradient(135deg,#06110d_0%,#0a1812_48%,#020403_100%)]" />
-        <div className="absolute inset-x-0 top-0 -z-10 h-72 bg-gradient-to-b from-lime-300/10 to-transparent" />
+        <div
+          className="absolute inset-0 -z-10 bg-[#06110d] bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroImage})` }}
+        />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(3,10,7,0.94)_0%,rgba(3,10,7,0.82)_38%,rgba(3,10,7,0.46)_100%),linear-gradient(180deg,rgba(3,10,7,0.28)_0%,rgba(6,17,13,0.72)_70%,#06110d_100%)]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(132,204,22,0.22),transparent_30%),radial-gradient(circle_at_78%_24%,rgba(20,184,166,0.12),transparent_28%)]" />
 
         <div className="mx-auto grid min-h-screen w-full max-w-7xl items-center gap-12 px-6 py-10 sm:px-8 lg:grid-cols-[1.02fr_0.98fr] lg:px-10">
           <div className="pt-10 lg:pt-0">
