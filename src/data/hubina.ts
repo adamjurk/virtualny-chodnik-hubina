@@ -108,7 +108,7 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "QR stránka môže fungovať ako malý orientačný sprievodca výhľadom.",
-    mapPosition: { top: "24%", left: "30%" },
+    mapPosition: { top: "21%", left: "39%" },
     order: 2,
   },
   {
@@ -159,7 +159,7 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "Po doplnení GPS bodu tu môže byť aj krátka orientačná mapa alebo zoznam viditeľných smerov.",
-    mapPosition: { top: "28%", left: "55%" },
+    mapPosition: { top: "14%", left: "61%" },
     order: 5,
   },
   {
@@ -193,7 +193,7 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "QR obsah môže obsahovať orientačný opis panorámy a odkazy na ďalšie body v okolí.",
-    mapPosition: { top: "64%", left: "78%" },
+    mapPosition: { top: "62%", left: "90%" },
     order: 7,
   },
   {

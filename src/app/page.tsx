@@ -110,13 +110,6 @@ export default function Home() {
                   </Link>
                 ))}
 
-                <div className="absolute bottom-4 left-4 right-4 border border-white/10 bg-black/45 p-4 backdrop-blur-md sm:left-auto sm:w-72">
-                  <p className="text-sm font-medium text-lime-200">Veľký pracovný okruh</p>
-                  <p className="mt-1 text-2xl font-semibold">{featuredRoute.name}</p>
-                  <p className="mt-2 text-sm leading-6 text-white/64">
-                    Orientačný náhľad podľa mapových screenshotov. Presné GPS body doplníme postupne.
-                  </p>
-                </div>
               </div>
             </div>
           </div>
