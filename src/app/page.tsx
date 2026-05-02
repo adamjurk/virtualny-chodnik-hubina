@@ -105,8 +105,12 @@ export default function Home() {
                     }}
                     aria-label={stop.name}
                   >
-                    <span className="grid h-9 w-9 place-items-center rounded-full border-2 border-white bg-[#d61718] text-sm font-bold text-white shadow-[0_10px_24px_rgba(0,0,0,0.42)] transition group-hover:scale-110 group-hover:bg-lime-300 group-hover:text-[#07110d] sm:h-10 sm:w-10">
-                      {stop.order}
+                    <span
+                      className={`grid h-9 place-items-center rounded-full border-2 border-white bg-[#d61718] text-sm font-bold text-white shadow-[0_10px_24px_rgba(0,0,0,0.42)] transition group-hover:scale-110 group-hover:bg-lime-300 group-hover:text-[#07110d] sm:h-10 ${
+                        stop.markerLabel ? "min-w-16 px-3 text-xs" : "w-9 sm:w-10"
+                      }`}
+                    >
+                      {stop.markerLabel ?? stop.order}
                     </span>
                     <span className="pointer-events-none absolute left-1/2 top-11 hidden w-44 -translate-x-1/2 border border-white/12 bg-[#07110d]/88 px-3 py-2 text-center text-xs font-semibold leading-4 text-white opacity-0 shadow-xl backdrop-blur transition group-hover:opacity-100 sm:block">
                       {stop.name}

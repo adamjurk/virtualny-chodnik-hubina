@@ -16,6 +16,7 @@ export type Stop = {
     x: string;
     y: string;
   };
+  markerLabel?: string;
   order: number;
 };
 
@@ -37,12 +38,12 @@ const bigCircleStops = [
   "krizova-cesta-kaplnka",
   "skalka",
   "stary-kamenolom",
-  "gonove-lazy",
   "grnica",
-  "visiace-skaly",
+  "gonove-lazy",
   "rozhladna-marhat",
-  "pamatnik-vlada-plulika",
   "dolnosokolske-jaskyne",
+  "pamatnik-vlada-plulika",
+  "visiace-skaly",
 ];
 
 export const routes: Route[] = [
@@ -95,9 +96,10 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "Tento bod môže fungovať ako úvodný QR kód pre návštevníkov, ktorí začínajú priamo v obci.",
-    mapPosition: { top: "26.1%", left: "23.2%" },
-    markerOffset: { x: "-14px", y: "0px" },
-    order: 10,
+    mapPosition: { top: "27.8%", left: "24.1%" },
+    markerOffset: { x: "-16px", y: "12px" },
+    markerLabel: "START",
+    order: 1,
   },
   {
     slug: "krizova-cesta-kaplnka",
@@ -113,9 +115,9 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "QR kód na tomto mieste by mal návštevníka priviesť priamo sem, nie na hlavnú stránku.",
-    mapPosition: { top: "25.3%", left: "23.8%" },
-    markerOffset: { x: "14px", y: "0px" },
-    order: 1,
+    mapPosition: { top: "25.4%", left: "25.1%" },
+    markerOffset: { x: "18px", y: "-10px" },
+    order: 2,
   },
   {
     slug: "skalka",
@@ -131,8 +133,9 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "QR stránka môže fungovať ako malý orientačný sprievodca výhľadom.",
-    mapPosition: { top: "19.1%", left: "33.5%" },
-    order: 2,
+    mapPosition: { top: "19.5%", left: "33.0%" },
+    markerOffset: { x: "12px", y: "10px" },
+    order: 3,
   },
   {
     slug: "stary-kamenolom",
@@ -148,12 +151,13 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "Toto zastavenie je dobrý kandidát na kombináciu textu, staršej fotografie a bezpečnostnej poznámky k pohybu v teréne.",
-    mapPosition: { top: "15%", left: "32.2%" },
-    order: 3,
+    mapPosition: { top: "16.3%", left: "31.9%" },
+    markerOffset: { x: "-12px", y: "-12px" },
+    order: 4,
   },
   {
     slug: "gonove-lazy",
-    name: "Gonove lazy",
+    name: "Cyklisticky razcestnik Gonove lazy",
     type: "pribeh",
     routeSlug: "velky-okruh",
     shortDescription:
@@ -165,8 +169,8 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "QR stránka môže slúžiť ako krátke vysvetlenie lazníckej krajiny a starých miestnych názvov.",
-    mapPosition: { top: "24.7%", left: "64.2%" },
-    order: 4,
+    mapPosition: { top: "27.7%", left: "64.0%" },
+    order: 6,
   },
   {
     slug: "grnica",
@@ -182,7 +186,7 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "Po doplnení GPS bodu tu môže byť aj krátka orientačná mapa alebo zoznam viditeľných smerov.",
-    mapPosition: { top: "17%", left: "49.5%" },
+    mapPosition: { top: "18.8%", left: "49.0%" },
     order: 5,
   },
   {
@@ -199,8 +203,9 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "Tu sa oplatí pridať bezpečnostnú poznámku a upozorniť, že návštevník nemá schádzať mimo chodníka.",
-    mapPosition: { top: "87.7%", left: "71.7%" },
-    order: 6,
+    mapPosition: { top: "86.5%", left: "71.8%" },
+    markerLabel: "CIEĽ",
+    order: 10,
   },
   {
     slug: "rozhladna-marhat",
@@ -216,7 +221,7 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "QR obsah môže obsahovať orientačný opis panorámy a odkazy na ďalšie body v okolí.",
-    mapPosition: { top: "67.2%", left: "89.4%" },
+    mapPosition: { top: "67.0%", left: "89.0%" },
     order: 7,
   },
   {
@@ -233,9 +238,9 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "Pred finálnym publikovaním tu bude dobré overiť text s dôveryhodným zdrojom alebo rodinou/obcou.",
-    mapPosition: { top: "68.3%", left: "66.8%" },
-    markerOffset: { x: "-14px", y: "10px" },
-    order: 8,
+    mapPosition: { top: "67.4%", left: "66.4%" },
+    markerOffset: { x: "18px", y: "8px" },
+    order: 9,
   },
   {
     slug: "dolnosokolske-jaskyne",
@@ -251,9 +256,9 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "Pri jaskyniach je dôležité doplniť praktickú bezpečnostnú poznámku a jasné pravidlá správania.",
-    mapPosition: { top: "66.1%", left: "65.9%" },
-    markerOffset: { x: "14px", y: "-10px" },
-    order: 9,
+    mapPosition: { top: "65.6%", left: "65.5%" },
+    markerOffset: { x: "-18px", y: "-12px" },
+    order: 8,
   },
 ];
 
