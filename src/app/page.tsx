@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getStopsForRoute, routes, stops } from "@/src/data/hubina";
 
 const stats = [
@@ -9,6 +10,7 @@ const stats = [
 ];
 
 const heroImage = "/hubina-panorama.jpg";
+const mapImage = "/hubina-map.webp";
 
 const typeLabel = {
   pribeh: "Príbeh",
@@ -81,20 +83,15 @@ export default function Home() {
 
           <div id="mapa" className="relative mx-auto w-full max-w-xl lg:max-w-none">
             <div className="border border-white/12 bg-[#0b1a14]/88 p-4 shadow-2xl shadow-black/35 backdrop-blur">
-              <div className="relative aspect-[4/5] overflow-hidden border border-lime-200/10 bg-[linear-gradient(145deg,rgba(20,47,34,0.98),rgba(8,19,15,0.98))] sm:aspect-[5/4] lg:aspect-[4/5]">
-                <div className="absolute inset-0 opacity-65 [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:44px_44px]" />
-                <div className="absolute left-[10%] top-[15%] h-[72%] w-[75%] rounded-[48%] border border-lime-300/16" />
-                <div className="absolute left-[20%] top-[18%] h-[52%] w-[58%] rotate-12 rounded-[48%] border border-cyan-200/14" />
-                <svg aria-hidden="true" className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  <path
-                    d="M16 30 C25 22 31 22 35 30 C43 44 53 31 61 39 C70 49 87 42 82 54 C75 69 65 66 62 78 C58 92 43 74 35 69 C27 64 17 67 16 30"
-                    fill="none"
-                    stroke="rgba(190,242,100,0.72)"
-                    strokeDasharray="2 3"
-                    strokeLinecap="round"
-                    strokeWidth="0.8"
-                  />
-                </svg>
+              <div className="relative aspect-square overflow-hidden border border-lime-200/10 bg-[#102217]">
+                <Image
+                  src={mapImage}
+                  alt="Turistická mapa okolia Hubiny"
+                  fill
+                  sizes="(min-width: 1024px) 46vw, (min-width: 640px) 560px, 92vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-[#06110d]/10" />
 
                 {featuredStops.map((stop) => (
                   <Link
@@ -104,13 +101,16 @@ export default function Home() {
                     style={{ top: stop.mapPosition.top, left: stop.mapPosition.left }}
                     aria-label={stop.name}
                   >
-                    <span className="grid h-10 w-10 place-items-center rounded-full border border-lime-100/60 bg-[#13261c] text-sm font-bold text-lime-100 shadow-[0_0_32px_rgba(190,242,100,0.24)] transition group-hover:scale-105 group-hover:bg-lime-300 group-hover:text-[#07110d]">
+                    <span className="grid h-9 w-9 place-items-center rounded-full border-2 border-white bg-[#d61718] text-sm font-bold text-white shadow-[0_10px_24px_rgba(0,0,0,0.42)] transition group-hover:scale-110 group-hover:bg-lime-300 group-hover:text-[#07110d] sm:h-10 sm:w-10">
                       {stop.order}
+                    </span>
+                    <span className="pointer-events-none absolute left-1/2 top-11 hidden w-44 -translate-x-1/2 border border-white/12 bg-[#07110d]/88 px-3 py-2 text-center text-xs font-semibold leading-4 text-white opacity-0 shadow-xl backdrop-blur transition group-hover:opacity-100 sm:block">
+                      {stop.name}
                     </span>
                   </Link>
                 ))}
 
-                <div className="absolute bottom-4 left-4 right-4 border border-white/10 bg-black/40 p-4 backdrop-blur-md">
+                <div className="absolute bottom-4 left-4 right-4 border border-white/10 bg-black/45 p-4 backdrop-blur-md sm:left-auto sm:w-72">
                   <p className="text-sm font-medium text-lime-200">Veľký pracovný okruh</p>
                   <p className="mt-1 text-2xl font-semibold">{featuredRoute.name}</p>
                   <p className="mt-2 text-sm leading-6 text-white/64">
