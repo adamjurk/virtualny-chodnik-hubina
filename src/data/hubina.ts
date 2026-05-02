@@ -12,6 +12,10 @@ export type Stop = {
     top: string;
     left: string;
   };
+  markerOffset?: {
+    x: string;
+    y: string;
+  };
   order: number;
 };
 
@@ -29,6 +33,7 @@ export type Route = {
 const firstCircleStops = ["krizova-cesta-kaplnka", "skalka", "stary-kamenolom"];
 
 const bigCircleStops = [
+  "kostol",
   "krizova-cesta-kaplnka",
   "skalka",
   "stary-kamenolom",
@@ -72,11 +77,28 @@ export const routes: Route[] = [
     difficulty: "ľahká",
     description:
       "Krátka mestská verzia pre rodiny, návštevníkov a školy. Sem neskôr pribudnú body v obci, hostince, pamätné miesta a praktické informácie.",
-    stopSlugs: [],
+    stopSlugs: ["kostol"],
   },
 ];
 
 export const stops: Stop[] = [
+  {
+    slug: "kostol",
+    name: "Kostol",
+    type: "prakticke",
+    routeSlug: "centrum-a-pribehy",
+    shortDescription:
+      "Východiskový bod v obci, vhodný ako orientačný začiatok kratších aj dlhších okruhov.",
+    story: [
+      "Kostol slúži v pracovnej mape ako praktický orientačný bod priamo v obci.",
+      "Vo finálnej verzii sem môžeme doplniť krátky opis miesta, historický kontext a odporúčanie, kadiaľ sa napojiť na trasu.",
+    ],
+    qrNote:
+      "Tento bod môže fungovať ako úvodný QR kód pre návštevníkov, ktorí začínajú priamo v obci.",
+    mapPosition: { top: "26.1%", left: "23.2%" },
+    markerOffset: { x: "-14px", y: "0px" },
+    order: 10,
+  },
   {
     slug: "krizova-cesta-kaplnka",
     name: "Krížová cesta / Kaplnka Božieho milosrdenstva",
@@ -91,7 +113,8 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "QR kód na tomto mieste by mal návštevníka priviesť priamo sem, nie na hlavnú stránku.",
-    mapPosition: { top: "30%", left: "16%" },
+    mapPosition: { top: "25.3%", left: "23.8%" },
+    markerOffset: { x: "14px", y: "0px" },
     order: 1,
   },
   {
@@ -108,7 +131,7 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "QR stránka môže fungovať ako malý orientačný sprievodca výhľadom.",
-    mapPosition: { top: "21%", left: "39%" },
+    mapPosition: { top: "19.1%", left: "33.5%" },
     order: 2,
   },
   {
@@ -125,7 +148,7 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "Toto zastavenie je dobrý kandidát na kombináciu textu, staršej fotografie a bezpečnostnej poznámky k pohybu v teréne.",
-    mapPosition: { top: "28%", left: "34%" },
+    mapPosition: { top: "15%", left: "32.2%" },
     order: 3,
   },
   {
@@ -142,7 +165,7 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "QR stránka môže slúžiť ako krátke vysvetlenie lazníckej krajiny a starých miestnych názvov.",
-    mapPosition: { top: "20%", left: "31%" },
+    mapPosition: { top: "24.7%", left: "64.2%" },
     order: 4,
   },
   {
@@ -159,7 +182,7 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "Po doplnení GPS bodu tu môže byť aj krátka orientačná mapa alebo zoznam viditeľných smerov.",
-    mapPosition: { top: "14%", left: "61%" },
+    mapPosition: { top: "17%", left: "49.5%" },
     order: 5,
   },
   {
@@ -176,7 +199,7 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "Tu sa oplatí pridať bezpečnostnú poznámku a upozorniť, že návštevník nemá schádzať mimo chodníka.",
-    mapPosition: { top: "38%", left: "74%" },
+    mapPosition: { top: "87.7%", left: "71.7%" },
     order: 6,
   },
   {
@@ -193,7 +216,7 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "QR obsah môže obsahovať orientačný opis panorámy a odkazy na ďalšie body v okolí.",
-    mapPosition: { top: "62%", left: "90%" },
+    mapPosition: { top: "67.2%", left: "89.4%" },
     order: 7,
   },
   {
@@ -210,7 +233,8 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "Pred finálnym publikovaním tu bude dobré overiť text s dôveryhodným zdrojom alebo rodinou/obcou.",
-    mapPosition: { top: "72%", left: "54%" },
+    mapPosition: { top: "68.3%", left: "66.8%" },
+    markerOffset: { x: "-14px", y: "10px" },
     order: 8,
   },
   {
@@ -227,7 +251,8 @@ export const stops: Stop[] = [
     ],
     qrNote:
       "Pri jaskyniach je dôležité doplniť praktickú bezpečnostnú poznámku a jasné pravidlá správania.",
-    mapPosition: { top: "74%", left: "55%" },
+    mapPosition: { top: "66.1%", left: "65.9%" },
+    markerOffset: { x: "14px", y: "-10px" },
     order: 9,
   },
 ];

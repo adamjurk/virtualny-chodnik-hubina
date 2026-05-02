@@ -3,7 +3,7 @@ import Image from "next/image";
 import { getStopsForRoute, routes, stops } from "@/src/data/hubina";
 
 const stats = [
-  { value: "9", label: "testových zastavení" },
+  { value: "10", label: "testových zastavení" },
   { value: "3", label: "navrhnuté okruhy" },
   { value: "17 km", label: "veľký okruh z podkladu" },
   { value: "QR", label: "priame stránky bodov" },
@@ -97,8 +97,12 @@ export default function Home() {
                   <Link
                     key={stop.slug}
                     href={`/zastavenia/${stop.slug}`}
-                    className="group absolute -translate-x-1/2 -translate-y-1/2"
-                    style={{ top: stop.mapPosition.top, left: stop.mapPosition.left }}
+                    className="group absolute"
+                    style={{
+                      top: stop.mapPosition.top,
+                      left: stop.mapPosition.left,
+                      transform: `translate(calc(-50% + ${stop.markerOffset?.x ?? "0px"}), calc(-50% + ${stop.markerOffset?.y ?? "0px"}))`,
+                    }}
                     aria-label={stop.name}
                   >
                     <span className="grid h-9 w-9 place-items-center rounded-full border-2 border-white bg-[#d61718] text-sm font-bold text-white shadow-[0_10px_24px_rgba(0,0,0,0.42)] transition group-hover:scale-110 group-hover:bg-lime-300 group-hover:text-[#07110d] sm:h-10 sm:w-10">
