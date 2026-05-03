@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { getStopsForRoute, routes, stops } from "@/src/data/hubina";
+import { HubinaInteractiveMap } from "@/src/components/HubinaInteractiveMap";
 
 const stats = [
   { value: "10", label: "testových zastavení" },
@@ -11,6 +11,7 @@ const stats = [
 
 const heroImage = "/hubina-panorama.jpg";
 const mapImage = "/hubina-map.webp";
+const mapyApiKey = process.env.NEXT_PUBLIC_MAPY_API_KEY ?? "";
 
 const typeLabel = {
   pribeh: "Príbeh",
@@ -83,42 +84,7 @@ export default function Home() {
 
           <div id="mapa" className="relative mx-auto w-full max-w-xl lg:max-w-none">
             <div className="border border-white/12 bg-[#0b1a14]/88 p-4 shadow-2xl shadow-black/35 backdrop-blur">
-              <div className="relative aspect-square overflow-hidden border border-lime-200/10 bg-[#102217]">
-                <Image
-                  src={mapImage}
-                  alt="Turistická mapa okolia Hubiny"
-                  fill
-                  sizes="(min-width: 1024px) 46vw, (min-width: 640px) 560px, 92vw"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-[#06110d]/10" />
-
-                {featuredStops.map((stop) => (
-                  <Link
-                    key={stop.slug}
-                    href={`/zastavenia/${stop.slug}`}
-                    className="group absolute"
-                    style={{
-                      top: stop.mapPosition.top,
-                      left: stop.mapPosition.left,
-                      transform: `translate(calc(-50% + ${stop.markerOffset?.x ?? "0px"}), calc(-50% + ${stop.markerOffset?.y ?? "0px"}))`,
-                    }}
-                    aria-label={stop.name}
-                  >
-                    <span
-                      className={`grid h-9 place-items-center rounded-full border-2 border-white bg-[#d61718] text-sm font-bold text-white shadow-[0_10px_24px_rgba(0,0,0,0.42)] transition group-hover:scale-110 group-hover:bg-lime-300 group-hover:text-[#07110d] sm:h-10 ${
-                        stop.markerLabel ? "min-w-16 px-3 text-xs" : "w-9 sm:w-10"
-                      }`}
-                    >
-                      {stop.markerLabel ?? stop.order}
-                    </span>
-                    <span className="pointer-events-none absolute left-1/2 top-11 hidden w-44 -translate-x-1/2 border border-white/12 bg-[#07110d]/88 px-3 py-2 text-center text-xs font-semibold leading-4 text-white opacity-0 shadow-xl backdrop-blur transition group-hover:opacity-100 sm:block">
-                      {stop.name}
-                    </span>
-                  </Link>
-                ))}
-
-              </div>
+              <HubinaInteractiveMap apiKey={mapyApiKey} fallbackImage={mapImage} stops={featuredStops} />
             </div>
           </div>
         </div>
