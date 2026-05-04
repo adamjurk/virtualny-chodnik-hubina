@@ -11,7 +11,7 @@ const stats = [
 
 const heroImage = "/hubina-panorama.jpg";
 const mapImage = "/hubina-map.webp";
-const mapyApiKey = process.env.NEXT_PUBLIC_MAPY_API_KEY ?? "";
+const mapyApiKey = process.env.NEXT_PUBLIC_MAPY_API_KEY ?? "lhuTcVXzX55OsnOUtlfjvvovSp-c0Dfb0at-BDoqMNQ";
 
 const typeLabel = {
   pribeh: "Príbeh",
