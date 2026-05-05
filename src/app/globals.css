@@ -33,3 +33,16 @@ html {
   background: rgba(190, 242, 100, 0.32);
   color: #ffffff;
 }
+
+.input {
+  width: 100%;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  background: rgb(6 17 13 / 0.82);
+  padding: 0.75rem;
+  color: #ffffff;
+  outline: none;
+}
+
+.input:focus {
+  border-color: rgb(190 242 100 / 0.9);
+}
