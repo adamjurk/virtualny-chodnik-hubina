@@ -59,6 +59,7 @@ function clampCard(left: number, top: number, width: number, height: number) {
 export function HubinaInteractiveMap({ apiKey, fallbackImage, stops }: Props) {
   const box = useRef<HTMLDivElement>(null);
   const drag = useRef<{ id: number; start: XY; center: XY } | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [zoom, setZoom] = useState(startZoom);
   const [center, setCenter] = useState(startCenter);
   const [size, setSize] = useState({ width: 560, height: 560 });
@@ -107,6 +108,16 @@ export function HubinaInteractiveMap({ apiKey, fallbackImage, stops }: Props) {
 
   function changeZoom(next: number) {
     setZoom(Math.min(maxZoom, Math.max(minZoom, next)));
+  }
+
+  function showPopup(slug: string) {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setActiveSlug(slug);
+  }
+
+  function schedulePopupClose() {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setActiveSlug(null), 90);
   }
 
   function markerPosition(stop: Stop) {
@@ -207,8 +218,10 @@ export function HubinaInteractiveMap({ apiKey, fallbackImage, stops }: Props) {
             aria-label={stop.name}
             onPointerDown={(event) => event.stopPropagation()}
             onWheel={(event) => event.stopPropagation()}
-            onMouseEnter={() => setActiveSlug(stop.slug)}
-            onFocus={() => setActiveSlug(stop.slug)}
+            onMouseEnter={() => showPopup(stop.slug)}
+            onMouseLeave={schedulePopupClose}
+            onFocus={() => showPopup(stop.slug)}
+            onBlur={schedulePopupClose}
           >
             <span className="grid h-9 w-9 place-items-center rounded-full border-2 border-white bg-[#d61718] text-sm font-bold text-white shadow-[0_10px_24px_rgba(0,0,0,0.42)] transition group-hover:scale-110 group-hover:bg-lime-300 group-hover:text-[#07110d] sm:h-10 sm:w-10">
               <span className="h-3 w-3 rotate-45 border-2 border-current bg-current/20" />
@@ -224,7 +237,8 @@ export function HubinaInteractiveMap({ apiKey, fallbackImage, stops }: Props) {
           style={activeCard ? { left: activeCard.left, top: activeCard.top } : { left: activePosition.left, top: activePosition.top }}
           onPointerDown={(event) => event.stopPropagation()}
           onWheel={(event) => event.stopPropagation()}
-          onMouseEnter={() => setActiveSlug(activeStop.slug)}
+          onMouseEnter={() => showPopup(activeStop.slug)}
+          onMouseLeave={schedulePopupClose}
         >
           <span className="relative block h-24 overflow-hidden bg-[#13251a]">
             <Image src={previewImage} alt="" fill sizes="256px" className="object-cover" />
