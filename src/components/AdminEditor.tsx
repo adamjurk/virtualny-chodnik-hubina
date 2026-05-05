@@ -155,10 +155,6 @@ export function AdminEditor({ initialStops, onLogout }: Props) {
             <textarea value={selected.story.join("\n")} onChange={(event) => updateSelected({ story: event.target.value.split("\n") })} className="input min-h-52" />
           </Field>
 
-          <Field label="QR poznámka">
-            <textarea value={selected.qrNote} onChange={(event) => updateSelected({ qrNote: event.target.value })} className="input min-h-24" />
-          </Field>
-
           <div className="mt-6 flex flex-wrap gap-3">
             <button onClick={saveDraft} className="min-h-11 bg-lime-300 px-5 font-semibold text-[#07110d]">
               Uložiť pracovnú verziu
