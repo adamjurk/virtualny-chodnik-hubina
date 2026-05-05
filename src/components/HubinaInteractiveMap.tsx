@@ -62,8 +62,10 @@ export function HubinaInteractiveMap({ apiKey, fallbackImage, stops }: Props) {
   const [zoom, setZoom] = useState(startZoom);
   const [center, setCenter] = useState(startCenter);
   const [size, setSize] = useState({ width: 560, height: 560 });
+  const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const live = apiKey.trim().length > 0;
   const centerPoint = project(center.lat, center.lon, zoom);
+  const activeStop = stops.find((stop) => stop.slug === activeSlug);
 
   const tiles = useMemo(() => {
     if (!live) return [];
@@ -107,8 +109,21 @@ export function HubinaInteractiveMap({ apiKey, fallbackImage, stops }: Props) {
     setZoom(Math.min(maxZoom, Math.max(minZoom, next)));
   }
 
+  function markerPosition(stop: Stop) {
+    const c = coords[stop.slug] ?? startCenter;
+    const p = project(c.lat, c.lon, zoom);
+    const liveLeft = p.x - centerPoint.x + size.width / 2 + px(stop.markerOffset?.x);
+    const liveTop = p.y - centerPoint.y + size.height / 2 + px(stop.markerOffset?.y);
+    return {
+      liveLeft,
+      liveTop,
+      left: live ? liveLeft : stop.mapPosition.left,
+      top: live ? liveTop : stop.mapPosition.top,
+    };
+  }
+
   function onDown(event: PointerEvent<HTMLDivElement>) {
-    if (!live) return;
+    if (!live || !event.ctrlKey) return;
     setBoxSize();
     event.currentTarget.setPointerCapture(event.pointerId);
     drag.current = { id: event.pointerId, start: { x: event.clientX, y: event.clientY }, center: centerPoint };
@@ -126,22 +141,28 @@ export function HubinaInteractiveMap({ apiKey, fallbackImage, stops }: Props) {
   }
 
   function onWheel(event: WheelEvent<HTMLDivElement>) {
-    if (!live) return;
-    if (!event.ctrlKey) return;
+    if (!live || !event.ctrlKey) return;
     event.preventDefault();
     setBoxSize();
     changeZoom(zoom + (event.deltaY < 0 ? 1 : -1));
   }
 
+  const activePosition = activeStop ? markerPosition(activeStop) : null;
+  const activeCard =
+    activePosition && live
+      ? clampCard(activePosition.liveLeft, activePosition.liveTop, size.width, size.height)
+      : null;
+
   return (
     <div
       ref={box}
-      className="relative aspect-square overflow-hidden border border-lime-200/10 bg-[#102217] touch-none"
+      className="relative aspect-square overflow-hidden border border-lime-200/10 bg-[#102217]"
       onPointerDown={onDown}
       onPointerMove={onMove}
       onPointerUp={() => (drag.current = null)}
       onPointerCancel={() => (drag.current = null)}
       onWheel={onWheel}
+      onMouseLeave={() => setActiveSlug(null)}
     >
       {live ? (
         <>
@@ -176,43 +197,46 @@ export function HubinaInteractiveMap({ apiKey, fallbackImage, stops }: Props) {
       )}
 
       {stops.map((stop) => {
-        const c = coords[stop.slug] ?? startCenter;
-        const p = project(c.lat, c.lon, zoom);
-        const liveLeft = p.x - centerPoint.x + size.width / 2 + px(stop.markerOffset?.x);
-        const liveTop = p.y - centerPoint.y + size.height / 2 + px(stop.markerOffset?.y);
-        const left = live ? liveLeft : stop.mapPosition.left;
-        const top = live ? liveTop : stop.mapPosition.top;
-        const card = clampCard(liveLeft, liveTop, size.width, size.height);
+        const point = markerPosition(stop);
         return (
           <Link
             key={stop.slug}
             href={`/zastavenia/${stop.slug}`}
             className="group absolute z-30 -translate-x-1/2 -translate-y-1/2"
-            style={{ left, top }}
+            style={{ left: point.left, top: point.top }}
             aria-label={stop.name}
             onPointerDown={(event) => event.stopPropagation()}
             onWheel={(event) => event.stopPropagation()}
+            onMouseEnter={() => setActiveSlug(stop.slug)}
+            onFocus={() => setActiveSlug(stop.slug)}
           >
             <span className="grid h-9 w-9 place-items-center rounded-full border-2 border-white bg-[#d61718] text-sm font-bold text-white shadow-[0_10px_24px_rgba(0,0,0,0.42)] transition group-hover:scale-110 group-hover:bg-lime-300 group-hover:text-[#07110d] sm:h-10 sm:w-10">
               <span className="h-3 w-3 rotate-45 border-2 border-current bg-current/20" />
             </span>
-            <span
-              className="pointer-events-auto absolute hidden w-64 -translate-x-1/2 border border-white/12 bg-[#07110d]/92 p-2 text-left text-white opacity-0 shadow-2xl backdrop-blur transition group-hover:opacity-100 sm:block"
-              style={live ? { left: card.left - liveLeft, top: card.top - liveTop } : { left: 0, top: 42 }}
-            >
-              <span className="relative block h-24 overflow-hidden bg-[#13251a]">
-                <Image src={previewImage} alt="" fill sizes="256px" className="object-cover" />
-                <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,17,13,0.06)_0%,rgba(7,17,13,0.5)_100%)]" />
-              </span>
-              <span className="block px-2 pb-2 pt-3">
-                <span className="block text-sm font-semibold leading-5 text-lime-100">{stop.name}</span>
-                <span className="mt-1 line-clamp-2 block text-xs font-medium leading-5 text-white/72">{stop.shortDescription}</span>
-                <span className="mt-2 block text-xs font-semibold text-lime-200">Otvoriť bod</span>
-              </span>
-            </span>
           </Link>
         );
       })}
+
+      {activeStop && activePosition ? (
+        <Link
+          href={`/zastavenia/${activeStop.slug}`}
+          className="absolute z-40 hidden w-64 -translate-x-1/2 border border-white/12 bg-[#07110d]/92 p-2 text-left text-white shadow-2xl backdrop-blur sm:block"
+          style={activeCard ? { left: activeCard.left, top: activeCard.top } : { left: activePosition.left, top: activePosition.top }}
+          onPointerDown={(event) => event.stopPropagation()}
+          onWheel={(event) => event.stopPropagation()}
+          onMouseEnter={() => setActiveSlug(activeStop.slug)}
+        >
+          <span className="relative block h-24 overflow-hidden bg-[#13251a]">
+            <Image src={previewImage} alt="" fill sizes="256px" className="object-cover" />
+            <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,17,13,0.06)_0%,rgba(7,17,13,0.5)_100%)]" />
+          </span>
+          <span className="block px-2 pb-2 pt-3">
+            <span className="block text-sm font-semibold leading-5 text-lime-100">{activeStop.name}</span>
+            <span className="mt-1 line-clamp-2 block text-xs font-medium leading-5 text-white/72">{activeStop.shortDescription}</span>
+            <span className="mt-2 block text-xs font-semibold text-lime-200">Otvoriť bod</span>
+          </span>
+        </Link>
+      ) : null}
     </div>
   );
 }
