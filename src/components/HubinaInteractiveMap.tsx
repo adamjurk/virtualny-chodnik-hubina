@@ -158,20 +158,13 @@ export function HubinaInteractiveMap({ apiKey, fallbackImage, stops }: Props) {
           ))}
           <div className="pointer-events-none absolute inset-0 bg-[#102217]/18 mix-blend-multiply" />
           <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-lime-200/10" />
-          <div className="absolute left-3 top-3 z-20 flex overflow-hidden border border-white/12 bg-[#07110d]/88 shadow-xl backdrop-blur">
+          <div
+            className="absolute left-3 top-3 z-20 flex overflow-hidden border border-white/12 bg-[#07110d]/88 shadow-xl backdrop-blur"
+            onPointerDown={(event) => event.stopPropagation()}
+            onWheel={(event) => event.stopPropagation()}
+          >
             <button type="button" aria-label="Priblizit" className="grid h-9 w-9 place-items-center text-lg font-semibold transition hover:bg-white/10" onClick={() => changeZoom(zoom + 1)}>+</button>
             <button type="button" aria-label="Oddialit" className="grid h-9 w-9 place-items-center border-l border-white/12 text-xl font-semibold transition hover:bg-white/10" onClick={() => changeZoom(zoom - 1)}>-</button>
-            <button
-              type="button"
-              aria-label="Vratit mapu na body zaujmu"
-              className="grid h-9 w-9 place-items-center border-l border-white/12 text-lime-200 transition hover:bg-white/10"
-              onClick={() => {
-                setCenter(startCenter);
-                setZoom(startZoom);
-              }}
-            >
-              <span className="h-3 w-3 rotate-45 border-2 border-current" />
-            </button>
           </div>
           <p className="absolute bottom-2 right-2 bg-[#07110d]/78 px-2 py-1 text-[10px] text-white/70">(c) Mapy.com (c) OpenStreetMap</p>
         </>
@@ -204,7 +197,7 @@ export function HubinaInteractiveMap({ apiKey, fallbackImage, stops }: Props) {
               <span className="h-3 w-3 rotate-45 border-2 border-current bg-current/20" />
             </span>
             <span
-              className="pointer-events-none absolute hidden w-64 -translate-x-1/2 border border-white/12 bg-[#07110d]/92 p-2 text-left text-white opacity-0 shadow-2xl backdrop-blur transition group-hover:opacity-100 sm:block"
+              className="pointer-events-auto absolute hidden w-64 -translate-x-1/2 border border-white/12 bg-[#07110d]/92 p-2 text-left text-white opacity-0 shadow-2xl backdrop-blur transition group-hover:opacity-100 sm:block"
               style={live ? { left: card.left - liveLeft, top: card.top - liveTop } : { left: 0, top: 42 }}
             >
               <span className="relative block h-24 overflow-hidden bg-[#13251a]">
