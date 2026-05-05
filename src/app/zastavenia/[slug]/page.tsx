@@ -56,7 +56,7 @@ export default async function StopPage({ params }: PageProps) {
           <Link href="/#zastavenia" className="text-sm font-semibold text-lime-200 hover:text-lime-100">
             Späť na chodník
           </Link>
-          <span className="text-sm text-white/54">QR zastavenie {String(stop.order).padStart(2, "0")}</span>
+          <span className="text-sm text-white/54">Zastavenie {String(stop.order).padStart(2, "0")}</span>
         </div>
       </section>
 
@@ -72,7 +72,7 @@ export default async function StopPage({ params }: PageProps) {
             {stop.shortDescription}
           </p>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
             <div className="rounded-lg border border-white/10 bg-white/[0.045] p-4">
               <p className="text-sm text-white/54">Okruh</p>
               <p className="mt-1 font-semibold text-lime-100">{route?.name ?? "Pracovný okruh"}</p>
@@ -81,25 +81,14 @@ export default async function StopPage({ params }: PageProps) {
               <p className="text-sm text-white/54">Stav obsahu</p>
               <p className="mt-1 font-semibold text-lime-100">Testovací text</p>
             </div>
-            <div className="rounded-lg border border-white/10 bg-white/[0.045] p-4">
-              <p className="text-sm text-white/54">Použitie</p>
-              <p className="mt-1 font-semibold text-lime-100">QR kód na mieste</p>
-            </div>
           </div>
 
-          <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_17rem]">
+          <div className="mt-12">
             <div className="space-y-6 text-base leading-8 text-white/72">
               {stop.story.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
-
-            <aside className="h-fit rounded-lg border border-lime-300/16 bg-lime-300/[0.055] p-5">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-lime-200">
-                Poznámka ku QR
-              </p>
-              <p className="mt-4 text-sm leading-6 text-white/68">{stop.qrNote}</p>
-            </aside>
           </div>
 
           <nav className="mt-14 grid gap-3 border-t border-white/8 pt-8 sm:grid-cols-2">
