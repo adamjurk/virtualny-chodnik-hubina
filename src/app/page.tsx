@@ -6,7 +6,7 @@ const stats = [
   { value: "10", label: "testových zastavení" },
   { value: "3", label: "navrhnuté okruhy" },
   { value: "17 km", label: "veľký okruh z podkladu" },
-  { value: "QR", label: "priame stránky bodov" },
+  { value: "10", label: "samostatné body záujmu" },
 ];
 
 const heroImage = "/hubina-panorama.jpg";
@@ -53,8 +53,8 @@ export default function Home() {
               Hubina ako sieť okruhov
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72 sm:text-xl">
-              Namiesto jednej dlhej trasy pripravujeme viac okruhov. Každé zastavenie bude
-              mať vlastnú QR stránku, aby návštevník otvoril presne miesto, na ktorom stojí.
+              Namiesto jednej dlhej trasy pripravujeme viac okruhov. Každý bod záujmu bude mať
+              vlastnú stránku s krátkym príbehom, fotkami a praktickým kontextom miesta.
             </p>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -68,7 +68,7 @@ export default function Home() {
                 href="#zastavenia"
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/18 bg-white/8 px-7 text-base font-semibold text-white backdrop-blur transition hover:border-lime-300/45 hover:bg-white/12"
               >
-                Pozrieť QR body
+                Pozrieť body záujmu
               </a>
             </div>
 
@@ -124,11 +124,11 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-lime-300">QR zastavenia</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-lime-300">Body záujmu</p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Pracovné podstránky bodov</h2>
             </div>
             <p className="max-w-xl text-base leading-7 text-white/62">
-              Každý bod má samostatnú URL pripravenú na QR kód. Texty sú zatiaľ pracovné a budeme ich nahrádzať reálnymi podkladmi.
+              Každý bod má samostatnú stránku pripravenú na dopĺňanie textov, fotiek a praktických informácií.
             </p>
           </div>
 
@@ -145,7 +145,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-2xl font-semibold group-hover:text-lime-100">{stop.name}</h3>
                 <p className="mt-4 text-sm leading-6 text-white/64">{stop.shortDescription}</p>
-                <p className="mt-6 text-sm font-semibold text-lime-200">Otvoriť QR stránku</p>
+                <p className="mt-6 text-sm font-semibold text-lime-200">Otvoriť bod</p>
               </Link>
             ))}
           </div>
@@ -180,7 +180,7 @@ export default function Home() {
       <footer className="border-t border-white/8 bg-[#050d09] px-6 py-10 text-sm text-white/56 sm:px-8 lg:px-10">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p>Virtuálny turistický chodník Hubina</p>
-          <p>Okruhy, QR zastavenia a praktické body v teréne.</p>
+          <p>Okruhy, body záujmu a praktické miesta v teréne.</p>
         </div>
       </footer>
     </main>
